@@ -19,7 +19,7 @@ g <- list(
   showcoastlines = FALSE,
   projection = list(type = 'Mercator')
 )
-
+ 
 fig <- plot_geo(happiness_map_2021)
 fig <- fig %>% add_trace(
   z = ~Happiness.Score, color = ~Happiness.Score, colors = 'Greens',
