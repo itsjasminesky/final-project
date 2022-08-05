@@ -1,4 +1,4 @@
-Country,Region,Happiness Score,Economy (Logged GDP per Capita),Family,Health (Life Expectancy),Freedom,Generosity,Generosity
+Country,Region,Happiness Score,Economy (Logged GDP per Capita),Family,Health (Life Expectancy),Freedom,Generosity,Trust (Government Corruption)
 Finland,Western Europe,7.808700085,10.63926697,0.954329729,71.9008255,0.949172199,-0.059482019,0.195444584
 Denmark,Western Europe,7.645599842,10.77400112,0.955990791,72.40250397,0.951444268,0.066201776,0.168489456
 Switzerland,Western Europe,7.559899807,10.97993279,0.942846596,74.10244751,0.921336651,0.105911039,0.303728431
