@@ -50,15 +50,6 @@ subset(world_happiness_19[c("Country","Health..Life.Expectancy.")], Health..Life
 summary_info19$maxfreedom<- max(world_happiness_19$Freedom) #0.631
 subset(world_happiness_19[c("Country","Freedom")], Freedom == summary_info19$maxfreedom) #Uzbekistan
 
-
-# For most current full year, Afghanistan has the minimum happiness while Finland has the happiness score
-#Singapore both has he highest life expectancy in 2019 and 2020 but also the largest distrust in the government in 2021. Also,in 2021,
-#Croatians had the highest trust in government. The average rate of happiness peaked in 2021 being 5.51 while the highest median meadian was in 2020. This could indicate slighter more outliers in the happiness per cointry.  suprisenly, during the peak of the covid epedemic . 
-#The lowest average happiness was in 2017 being 5.38.  The max GDPs tend to be in western Europe, small, high GDP distribution of GDPS or the Middle east(Qatar), which has a large variation in GDP per capitas.    
-#Mean health and life expectancy stedily increased through each year with the healthiest regions primarly being in East Asia and Western Europe. 
-#The countries with the least freedom were majorly in Central and Eastern Europe, Middle East and Sub Saharan Africa while the countries with the most freedom are Western Europe and Central Asia. 
-#The amount of countries accounted for per year varies, peaking in 2015 at 158 countries and the least in 20219 and 2021 wigh 149 countries. 
-
 # Summary Info 2018
 summary_info18$num_observations <- nrow(world_happiness_18) #156
 world_happiness_18 <- `2018`
