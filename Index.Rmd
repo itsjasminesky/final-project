@@ -2,41 +2,139 @@
 title: "Index"
 author: "Erin Morales"
 date: '2022-08-04'
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-As described above, you'll be creating six different files. Because the purpose of this assignment is to practice collaboration, each section should be completed by a different person (and each person must work on at least one file on their own). We'll be checking the commit history to ensure that each section was pushed by a different account. Here is additional information on each section:
 
-index.Rmd File
-In the Markdown document you create, you should run the other scripts to generate the necessary content your report:
+### Introduction:
 
-Write an introductory paragraph explaining the domain/data set (feel free to borrow from the project proposal)
+We believe happiness and health go hand in hand. The range of personal, social, economic, and environmental factors that influence health status are known as determinants of health but can also account for a population's happiness. We believe an intersectional lens is vital in identifying key factors that play into an individual's happiness. In turn, using multidimensional data could be crucial in implementing evidence-based policies to serve the public through an intersectional lens better. 
 
-Write a summary paragraph that includes information calculated by your summary information function
+This is specifically a set of data on World Happiness from 2015 to 2022, so it contains a total of 8 csv files within the set. The joy scores and rankings utilize information from the Gallup World Survey. The scores are based on answers to the most life evaluation address inquired within the survey. This file contains the Happiness Score for 153 countries and the factors used to explain the score.
 
-Render your table and describe pertinent observations found in it
 
-Describe the purpose of each chart (e.g., "this chart was intended to show the relationship between..."), render each chart, and describe pertinent observations found in each chart
+###Summary Paragraph:
 
-Summary Information Script
-The first file you should save in your project should store summary information in a list. For example:
+In 2021, Afghanistan had the minimum happiness while Finland had the happiness score. Singapore has the highest life expectancy in 2019 and 2020 but also the largest distrust in the government in 2021. Also, in 2021, Croatians had the highest trust in government. The average rate of happiness peaked in 2021 being 5.51, while the highest median was in 2020,  which could indicate more outliers. 
+The lowest average happiness was in 2017, being 5.38. The max GDPs tend to be in western Europe, small, high GDP distribution of GDPS, or the Middle East, which has a significant variation in GDP per capita.  Mean health and life expectancy steadily increased yearly, with the healthiest regions primarily being East Asia and Western Europe. The countries with the least freedom were majorly in Central and Eastern Europe, the Middle East, and Sub-Saharan Africa. In contrast, the countries with the most freedom were Western Europe and Central Asia. The number of countries per year varied, peaking in 2015 at 158 countries and the least in 2019 and 2021 with 149 countries. 
+
+###Tables:
 
 ```{r}
 
-world_happiness_21 <- read.csv('2021.csv')
+avg <- function(df) {
+  avg_of_year = mean(df$Happiness.Score)
+}
+average_2015 = avg(wh_2015_df)
+average_2016 = avg(wh_2016_df)
+average_2017 = avg(wh_2017_df)
+average_2018 = avg(wh_2018_df)
+average_2019 = avg(wh_2019_df)
+average_2020 = avg(wh_2020_df)
+average_2021 = avg(wh_2021_df)
+# Group 'Happiness_by_Region_2021' into a table
+Happiness_by_Region_2021 <- wh_2021_df %>%
+  select(Country, Region, Happiness.Score) %>%
+  group_by(Region) %>%
+  summarize(avg_by_region = mean(Happiness.Score)) %>%
+  arrange(desc(avg_by_region))
+
+
+
+# Create a function to take the mean of all numeric columns
+numeric_mean <- function(df) {
+  numeric_mean_df <- df %>%
+    summarise_at(c('Happiness.Score', 'Family', 
+                   'Health..Life.Expectancy.' , 'Freedom', 
+                 'Trust..Government.Corruption.', 'Generosity'),
+               mean, na.rm = TRUE)
+  return(numeric_mean_df)
+}
+# Create a table of all the means of numerical columns
+all_means_2015 <- numeric_mean(wh_2015_df)
+all_means_2016 <- numeric_mean(wh_2016_df)
+all_means_2017 <- numeric_mean(wh_2017_df)
+all_means_2018 <- numeric_mean(wh_2018_df)
+all_means_2019 <- numeric_mean(wh_2019_df)
+all_means_2020 <- numeric_mean(wh_2020_df)
+all_means_2021 <- numeric_mean(wh_2021_df)
+
+all_means_df <- rbind(all_means_2015, all_means_2016, all_means_2017,
+                      all_means_2018, all_means_2019, all_means_2020, 
+                      all_means_2021)
+all_means_df$year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021)
+all_means_df <- select(all_means_df, 7, 1, 2, 3, 4, 5, 6)
+
+
+
+# Create a function to take the max of all numeric columns
+numeric_mins <- function(df) {
+  numeric_mins_df <- df %>%
+    summarise_at(c('Happiness.Score', 'Family', 
+                   'Health..Life.Expectancy.' , 'Freedom', 
+                   'Trust..Government.Corruption.', 'Generosity'),
+                 min, na.rm = TRUE)
+  return(numeric_mins_df)
+}
+
+min_2015 <- numeric_mins(wh_2015_df)
+min_2016 <- numeric_mins(wh_2016_df)
+min_2017 <- numeric_mins(wh_2017_df)
+min_2018 <- numeric_mins(wh_2018_df)
+min_2019 <- numeric_mins(wh_2019_df)
+min_2020 <- numeric_mins(wh_2020_df)
+min_2021 <- numeric_mins(wh_2021_df)
+
+all_mins_df <- rbind(min_2015, min_2016, min_2017, min_2018, 
+                     min_2019, min_2020, min_2021)
+all_mins_df$year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021)
+all_mins_df <- select(all_mins_df, 7, 1, 2, 3, 4, 5, 6)
+
+
+numeric_max <- function(df) {
+  numeric_max_df <- df %>%
+    summarise_at(c('Happiness.Score', 'Family', 
+                   'Health..Life.Expectancy.' , 'Freedom', 
+                   'Trust..Government.Corruption.', 'Generosity'),
+                 max, na.rm = TRUE)
+  return(numeric_max_df)
+}
+
+max_2015 <- numeric_max(wh_2015_df)
+max_2016 <- numeric_max(wh_2016_df)
+max_2017 <- numeric_max(wh_2017_df)
+max_2018 <- numeric_max(wh_2018_df)
+max_2019 <- numeric_max(wh_2019_df)
+max_2020 <- numeric_max(wh_2020_df)
+max_2021 <- numeric_max(wh_2021_df)
+
+all_maxs_df <- rbind(max_2015, max_2016, max_2017, max_2018, 
+                     max_2019, max_2020, max_2021)
+all_maxs_df$year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021)
+all_maxs_df <- select(all_maxs_df, 7, 1, 2, 3, 4, 5, 6)
+
+
+# View all tables
+View(Happiness_by_Region_2021)
+View(all_means_df)
+View(all_mins_df)
+View(all_maxs_df)
 
 ```
 
+The aggregated tables here shown are supposed to represent the combined data from 2015-2021, a total of 7 years. Then The first table is shown to have the top 10 world happiness averages throughout those 7 years. The mean, min, and max table shows the top 7 countries in their respective category. This given data shows the harsh contrast of given data set and how factors such as freedom and generosity may contribute to country's happiness and overall well being.    
+
+
+
+###Chart summary:
 
 ```{r}
-library(ggplot2)
-library(dplyr)
-
-world_happiness_21 <- read.csv('2021.csv')
 
 ggplot(world_happiness_21, aes(x = Region, y = Economy..logged.GDP.per.Capita., fill = Region)) +
   geom_boxplot()+
@@ -45,19 +143,61 @@ ggplot(world_happiness_21, aes(x = Region, y = Economy..logged.GDP.per.Capita., 
   coord_flip()
 
 ```
+In this data visualization there are box plots representing the GDP capita by each world region. This visualization is helpful in identifying the different interquartile ranges and allows us to easily locate the mins and maxs of each region to compare globally.
+ 
  
 ```{r}
-model <- lm(Health..Life.Expectancy. ~ Economy..logged.GDP.per.Capita., data = happiness_df)
+GDPvsHealthExpectancy <- lm(Health..Life.Expectancy. ~ Economy..logged.GDP.per.Capita., data = happiness_df)
 summary(model)
 
-# 1/ add text with geom_text, use nudge to nudge the text
 ggplot(happiness_df, aes(x=Economy..logged.GDP.per.Capita., y=Health..Life.Expectancy.)) +
   geom_point() + # Show dots
+  labs(title= "GDP vs Health Expectancy", x= "Economy (GDP/Capita)", y= "Life Expectancy") +
   geom_text(
     label= data$Country,
     nudge_x = 0.25, nudge_y = 0.25, 
     check_overlap = T) + stat_smooth(method = "lm", se = FALSE)
 
-hist(model$residuals)
+hist(GDPvsHealthExpectancy$residuals)
  
 ```
+This linear regression was intended to show the relationship between GDP and health and a line that emphisizes the positive correlation of linear graph.
+The Histogram of the Residual can be used to check whether the variance is normally distributed. A symmetric bell-shaped histogram which is evenly distributed around zero indicates that the normality assumption is likely to be true. But since the histogram has a slight negative skew there is likely to be other factors contributing to the varience in the data.
+
+
+```{r}
+
+df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv')
+df <- select(df, COUNTRY, CODE)
+colnames(df)[1] <- 'Country'
+happiness_map_2021 <- merge(x = wh_2021_df, y = df, by = 'Country', all = TRUE)
+happiness_map_2021 <- select(happiness_map_2021, Country, CODE, Happiness.Score)
+happiness_map_2021 <- na.omit(happiness_map_2021)
+  
+
+# light grey boundaries
+l <- list(color = toRGB("grey"), width = 0.5)
+
+# specify map projection/options
+g <- list(
+  showframe = FALSE,
+  showcoastlines = FALSE,
+  projection = list(type = 'Mercator')
+)
+ 
+fig <- plot_geo(happiness_map_2021)
+fig <- fig %>% add_trace(
+  z = ~Happiness.Score, color = ~Happiness.Score, colors = 'Greens',
+  text = ~Country, locations = ~CODE, marker = list(line = l)
+)
+fig <- fig %>% colorbar(title = 'Happiness Score', tickprefix = ':) ')
+fig <- fig %>% layout(
+  title = 'World Happiness 2021',
+  geo = g
+)
+
+fig
+
+```
+
+This visualization is intended to show how a color gradient of the world happiness scale in the year 2021. This can be used to visually capture the major differences of the global west vs the global east through a color palette. 

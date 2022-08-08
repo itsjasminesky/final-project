@@ -23,6 +23,7 @@ summary(model)
 # 1/ add text with geom_text, use nudge to nudge the text
 ggplot(happiness_df, aes(x=Economy..logged.GDP.per.Capita., y=Health..Life.Expectancy.)) +
   geom_point() + # Show dots
+  labs(title= "GDP vs Health Expectancy", x= "Economy (GDP/Capita)", y= "Life Expectancy") +
   geom_text(
     label= data$Country,
     nudge_x = 0.25, nudge_y = 0.25, 
