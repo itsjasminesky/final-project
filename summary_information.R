@@ -1,7 +1,8 @@
 #Summary Information : World Happiness Report (2015-2021)
 summary_info <- list()
 library(dplyr)
-world_happiness_21 <- `2021`
+setwd("~/Documents/final-project-staccjch/data")
+world_happiness_21 <- read.csv("2021.csv")
 summary_info$num_observations <- nrow(world_happiness_21) #149
 summary_info$max_happiness_score <- max(world_happiness_21["Happiness.Score"])
 world_happiness_21[world_happiness_21$Happiness.Score == summary_info$max_happiness_score,] #Finland 
@@ -20,7 +21,7 @@ summary_info$mean_health21 <- mean(world_happiness_21$Health..Life.Expectancy., 
 
 #summary info 2020
 summary_info20$mean20 <- mean(world_happiness_20[["Happiness.Score"]], na.rm = TRUE) #5.47
-world_happiness_20<-`2020`
+world_happiness_20<-read.csv("2020.csv")
 summary_info20 <- list()
 summary_info20$num_observations <-nrow(world_happiness_20) #153
 summary_info20$median20 <- median(world_happiness_20$Happiness.Score) #5.51
@@ -36,7 +37,7 @@ subset(world_happiness_20[c("Country","Health..Life.Expectancy.")], Health..Life
 
 #Summary Info 2019
 summary_info$num_observations <- nrow(world_happiness_21) #149
-world_happiness_19 <- `2019`
+world_happiness_19 <- read.csv("2019.csv")
 summary_info19 <- list ()
 summary_info19$meangdp19 <- mean(world_happiness_19[["Economy..GDP.per.Capita."]])
 summary_info19$mean19 <- mean(world_happiness_19[["Happiness.Score"]], na.rm = TRUE) #5.41
@@ -44,7 +45,7 @@ summary_info19$median19 <- median(world_happiness_19$Happiness.Score) #5.38
 summary_info19$meangdp19 <- mean(world_happiness_19[["Economy..GDP.per.Capita."]]) #0.905
 summary_info19$mean_health <- mean(world_happiness_19$Health..Life.Expectancy.) #72.5
 summary_info19$max_health <- max(world_happiness_19$Health..Life.Expectancy.)
-subset(world_happiness_19[c("Country", "Health..Life.Expectancy")], Health..Life.Expectancy. == summary_info19$max_health) #1.14, Singapoore
+subset(world_happiness_19[c("Country", "Health..Life.Expectancy.")], Health..Life.Expectancy. == summary_info19$max_health) #1.14, Singapoore
 summary_info19$min_health <- min(world_happiness_19$Health..Life.Expectancy., na.rm = FALSE)
 subset(world_happiness_19[c("Country","Health..Life.Expectancy.")], Health..Life.Expectancy. == summary_info19$min_health) #0 Swaziland
 summary_info19$maxfreedom<- max(world_happiness_19$Freedom) #0.631
@@ -52,7 +53,7 @@ subset(world_happiness_19[c("Country","Freedom")], Freedom == summary_info19$max
 
 # Summary Info 2018
 summary_info18$num_observations <- nrow(world_happiness_18) #156
-world_happiness_18 <- `2018`
+world_happiness_18 <- read.csv("2018.csv")
 summary_info18 <- list()
 summary_info18$meangdp18 <- mean(world_happiness_18[["Economy..GDP.per.Capita."]]) #0.891
 summary_info18$mean18 <- mean(world_happiness_18[["Happiness.Score"]], na.rm = TRUE) #5.38
@@ -67,7 +68,7 @@ summary_info18$max_trust1 <- max(world_happiness_18["Trust..Government.Corruptio
 
 
 #Summary Info 2017
-world_happiness_17 <- `2017`
+world_happiness_17 <- read.csv("2017.csv")
 summary_info17 <- list()
 summary_info17$num_observations <- nrow(world_happiness_17) #155
 summary_info17$median17 <- median(world_happiness_17$Happiness.Score) #5.35
@@ -84,7 +85,7 @@ summary_info17$mostfreedom
 
 #Summary Info 2016
 
-world_happiness_16 <- `2016`
+world_happiness_16 <- read.csv("2016.csv")
 summary_info16 <- list()
 summary_info16$num_observations <- nrow(world_happiness_16) #157
 summary_info16$median16 <- median(world_happiness_16$Happiness.Score) #5.31
@@ -97,7 +98,7 @@ subset(world_happiness_16[c("Country","Freedom")], Freedom == summary_info16$max
 
 #Summary Info 2015
 
-world_happiness_15 <- `2015`
+world_happiness_15 <- read.csv("2015.csv")
 summary_info15 <- list()
 summary_info15$mean_health15 <- mean(world_happiness_15$Health..Life.Expectancy., na.rm = TRUE)  #0.63
 summary_info15$num_observations <- nrow(world_happiness_15) #158
