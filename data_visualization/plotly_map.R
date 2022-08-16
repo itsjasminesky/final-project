@@ -1,6 +1,7 @@
 library(plotly)
 # load in original dataframes
 setwd('~/info201/final-project-staccjch/data')
+wh_2021_df <- read.csv('2021.csv')
 mapping <- read.csv('2021.csv')
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv')
 df <- select(df, COUNTRY, CODE)
