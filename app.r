@@ -1,3 +1,8 @@
+# Deploy website
+#library(rsconnect)
+# rsconnect::deployApp("~/info201/final-project-staccjch/app.r")
+#deployApp()
+
 # Load Shiny
 library(shiny)
 library(shinythemes)
