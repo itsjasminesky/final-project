@@ -5,12 +5,9 @@ library(openintro)
 
 happiness_df <- read.csv("2021.csv")
 
-View(happiness_df)
-
 happiness_country <- happiness_df %>%
   select(Country)
 
-View(happiness_country)
 
 # Keep 30 first rows in the mtcars natively available data set
 data=head(happiness_df, 149)
