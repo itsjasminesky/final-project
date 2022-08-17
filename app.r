@@ -197,18 +197,40 @@ page_five <- tabPanel(
   mainPanel(
     h4("Stacy Che"),
     h4("Junior"),
-    h4("Major: Economics, Education"),
-    p('xxxxxxx'),
+    h4("Major: Economics, Education; Minor: Business"),
+    p('From this project, I developed a lot as a data analyst and a team-player. 
+      The measurement of happiness score and the trends we observed in this project 
+      gives me a chance to see the usefulness of data visulization. While the 
+      interactive map & data-wrangling in shiny improved my technical skill with R. 
+      To me a good team player, I realized I have the responsibility to constantly 
+      update my working progress, provide suggestions, and facilitate communication 
+      when working with my teammates. '),
     br(),
     h4("Erin Morales"),
     h4("Senior"),
-    h4("Major: Biochemistry"),
-    p('xxxxxx'),
+    h4("Major: Biochemistry; Minor: Data Science, Diversity"),
+    p('As a biochemistry and pre med student I place great importance on understanding 
+      the internal factors on maintaining a person\'s health and wellbeing. However, 
+      oftentimes we forget to understand the external factors that contribute to
+      a person’s welfare. As a result I believe analyzing the world happiness index
+      can help identify key contributing factors to happiness that can lead individuals
+      and society to a better, more meaningful, experience in life.'),
     br(),
     h4("Jasmine Y."),
     h4("Sophomore"),
     h4("Majors: N/A"),
-    p('xxxxxxxx')
+    p('This project reminded me of the factors that lead to a balanced life and 
+      strong communities: health, support systems, income, freedom, honesty in government,
+      and generosity. We can learn to use these factors to build into our value systems 
+      and as a foundation for policy making. It is prevalent that this report favors 
+      monetary values, with GDP per capita and Generosity being measured on donations 
+      to charity. Brazil has a high crime and poverty rate, but my family has strong 
+      social connections, causing greater emotional happiness. Nordic countries do have 
+      subsidized schooling and free healthcare but are not utopias. Though citizens of 
+      these counties are less likely to feel disenfranchised, there is also far-right 
+      nationalism on the rise and a trend of homogeneity. To share happiness, 
+      we must continue to fight for equity and make these six factors accessible 
+      to all.')
   )
 )
 
