@@ -13,7 +13,8 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(plotly)
-setwd("~/info201/final-project-staccjch/data")
+#setwd("~/info201/final-project-staccjch/data")
+setwd("C:/Users/mor_e/OneDrive - UW/Desktop/Pract Final Project/final-project-staccjch/data")
 # load in original dataframes
 wh_2016_df <- read.csv('2016.csv')
 wh_2015_df <- read.csv('2015.csv')
@@ -96,29 +97,22 @@ page_one <- tabPanel(
   titlePanel("Introduction"),
   mainPanel(
     h1("Domain of Interest"),
-    p('We believe happiness and health go hand in hand. The range of personal, social, 
-                economic, and environmental factors that influence health status are known as determinants 
-                of health but can also account for a population\'happiness.
-                We believe an intersectional lens is vital in identifying key factors that play 
-                into an individual\' happiness. In turn, using multidimensional data could be 
-                crucial in implementing evidence-based policies to serve the public through an 
-                intersectional lens better.'),
+    p('Happiness is typically thought of as a subjective experience and is separate from numerical data. 
+    However, happiness like other complex traits has multiple causes. We believe that positive and protective 
+    environmental experiences are the foundational in maintaining an enriching and meaningful life. The purpose
+    of this project is to analyze those factors that are deemed to contribute to happiness on an international scale
+    and to identify any correlations between variables that quantify happiness. On this basis the range of personal, 
+    social, economic, and environmental factors that are calculated in the world happiness index provide us 
+    intersectional lens while also using multidimensional data'),
     br(), 
     h1('Summary Paragraph'), 
-    p('In 2021, Afghanistan had the minimum happiness while Finland had the happiness score. 
-               Singapore has the highest life expectancy in 2019 and 2020 but also the largest distrust 
-               in the government in 2021. Also, in 2021, Croatians had the highest trust in government. 
-               The average rate of happiness peaked in 2021 being 5.51, while the highest median was in 2020, 
-               which could indicate more outliers. 
-               The lowest average happiness was in 2017, being 5.38. 
-               The max GDPs tend to be in western Europe, small, high GDP distribution of GDPS, 
-               or the Middle East, which has a significant variation in GDP per capita. 
-               Mean health and life expectancy steadily increased yearly, with the healthiest 
-               regions primarily being East Asia and Western Europe. 
-               The countries with the least freedom were majorly in Central and Eastern Europe, 
-               the Middle East, and Sub-Saharan Africa. In contrast, the countries with the most 
-               freedom were Western Europe and Central Asia. The number of countries per year varied, 
-               peaking in 2015 at 158 countries and the least in 2019 and 2021 with 149 countries. '),
+    p(' As shown by the world happineess map there is an overal greater ranking of happiness in the global West as 
+    opposed to the global South. This is also supported by our lollipop graph that show the happiness ranking per region. 
+    We find that in recent years the South Asia and Sub Saharan Africa had the lowest happiness ranking whereas the North 
+    Americas and Western Europe had the highest happiness rankings. Using this information we decided to compare life expectancy
+    and GDP to evaluate contransting differences between each country and found that the majority of Western countries lie in 
+    the upper rankings with Singapore having the best rating and Chad, an African country, having the worst rating in life expectancy
+    and GDP.'),
     br(),
     h1('Happiness Evaluators Descriptions'),
     dataTableOutput('table'))# close main panel
