@@ -1,6 +1,6 @@
 # Deploy website
-#library(rsconnect)
-# rsconnect::deployApp("~/info201/final-project-staccjch/app.r")
+library(rsconnect)
+#rsconnect::deployApp("~/info201/final-project-staccjch/app.r")
 #deployApp()
 
 # Load Shiny
@@ -13,8 +13,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyverse)
 library(plotly)
-#setwd("~/info201/final-project-staccjch/data")
-setwd("C:/Users/mor_e/OneDrive - UW/Desktop/Pract Final Project/final-project-staccjch/data")
+setwd("~/info201/final-project-staccjch/data")
 # load in original dataframes
 wh_2016_df <- read.csv('2016.csv')
 wh_2015_df <- read.csv('2015.csv')
@@ -103,10 +102,18 @@ page_one <- tabPanel(
     of this project is to analyze those factors that are deemed to contribute to happiness on an international scale
     and to identify any correlations between variables that quantify happiness. On this basis the range of personal, 
     social, economic, and environmental factors that are calculated in the world happiness index provide us 
-    intersectional lens while also using multidimensional data'),
+    intersectional lens while also using multidimensional data.'),
+    br(),
+    h1('Dataset Citation'),
+    tags$a(href='https://www.kaggle.com/datasets/mathurinache/world-happiness-report', tags$i('World Happiness Report Data')),
+    p('We download our data from Kaggle: It’s a set of data on World Happiness from 2015 to 2022, 
+    so it contains a total of 8 csv files within the set. The joy scores and rankings utilize 
+    information from the Gallup World Survey. The scores are based on answers to the most life 
+    evaluation address inquired within the survey. This file contains the Happiness Score for 153 
+    countries and the factors used to explain the score.'),
     br(), 
     h1('Summary Paragraph'), 
-    p(' As shown by the world happineess map there is an overal greater ranking of happiness in the global West as 
+    p('As shown by the world happineess map there is an overal greater ranking of happiness in the global West as 
     opposed to the global South. This is also supported by our lollipop graph that show the happiness ranking per region. 
     We find that in recent years the South Asia and Sub Saharan Africa had the lowest happiness ranking whereas the North 
     Americas and Western Europe had the highest happiness rankings. Using this information we decided to compare life expectancy
@@ -144,7 +151,7 @@ page_three <- tabPanel(
   titlePanel("Happiness by Region"),
   sidebarLayout(
     sidebarPanel(
-      radioButtons(inputId = 'radio2', h4('Choose Year to View Happiness Score Map:'), 
+      radioButtons(inputId = 'radio2', h4('Choose Year to View Happiness by Regions:'), 
                    choices = list('2015' = 1, '2016' = 2, '2017' = 3, 
                                   '2018' = 4, '2019' = 5, '2020' = 6,
                                   '2021' = 7)),
@@ -162,71 +169,94 @@ page_three <- tabPanel(
 # UI page four: Correlations
 page_four <- tabPanel(
   titlePanel("Happiness Correlations"),
-  sidebarLayout(
-    sidebarPanel(
-      radioButtons(inputId = 'radio1', h4('Choose Year to View Health vs GDP:'), 
-                   choices = list('2015' = 1, '2016' = 2, '2017' = 3, 
-                                  '2018' = 4, '2019' = 5, '2020' = 6,
-                                  '2021' = 7))
-    ),
-    mainPanel(
-      h1("GDP vs. Life Expantancy Impacts"),
-      plotlyOutput(outputId = 'scatterplot'),
-      p('This linear regression was intended to show the relationship between GDP 
+  tabsetPanel(
+    # subpage1: scatterplot of health&GDP correlations
+    tabPanel('Health & GDP',
+             sidebarLayout(
+               sidebarPanel(
+                 radioButtons(inputId = 'radio1', h4('Choose Year to View Health vs GDP:'), 
+                              choices = list('2015' = 1, '2016' = 2, '2017' = 3, 
+                                             '2018' = 4, '2019' = 5, '2020' = 6,
+                                             '2021' = 7))
+               ),
+               mainPanel(
+                 h1("GDP vs. Life Expantancy Impacts"),
+                 plotlyOutput(outputId = 'scatterplot'),
+                 p('This linear regression was intended to show the relationship between GDP 
     and health and a line that emphisizes the positive correlation of linear graph.
     The Histogram of the Residual can be used to check whether the variance is normally 
     distributed. A symmetric bell-shaped histogram which is evenly distributed around 
     zero indicates that the normality assumption is likely to be true. 
     But since the histogram has a slight negative skew there is likely to be other factors 
     contributing to the varience in the data.')
-    ) # close main panel
-  ) # close sidebarLayout
+               ) # close main panel
+             ) # close sidebarLayout
+    ), 
+    # subpage2: boxplot of other factors
+    tabPanel('Other Factors',
+             sidebarLayout(
+               sidebarPanel(
+                 radioButtons(inputId = 'radio3', h4('Choose which factor Happiness correlates with:'), 
+                              choices = list('Economy' = 1, 'Family' = 2, 'Health' = 3, 
+                                             'Freedom' = 4, 'Generosity' = 5, 'Trust' = 6))),
+               mainPanel(
+                 h1("Other Correlations"),
+                 plotOutput(outputId = 'boxplot'),
+                 p('boxplot intro')
+               ) # close main panel
+             ) # close sidebarLayout  
+             
+    )
+  ) # close tabset panel
+  
 )# close page 3
 
 
 
 # UI page 5: About Team
 page_five <- tabPanel(
-  titlePanel("About Team"),
-  mainPanel(
-    h4("Stacy Che"),
-    h4("Junior"),
-    h4("Major: Economics, Education; Minor: Business"),
-    p('From this project, I developed a lot as a data analyst and a team-player. 
-      The measurement of happiness score and the trends we observed in this project 
-      gives me a chance to see the usefulness of data visulization. While the 
-      interactive map & data-wrangling in shiny improved my technical skill with R. 
-      To me a good team player, I realized I have the responsibility to constantly 
-      update my working progress, provide suggestions, and facilitate communication 
-      when working with my teammates. '),
-    br(),
-    h4("Erin Morales"),
-    h4("Senior"),
-    h4("Major: Biochemistry; Minor: Data Science, Diversity"),
-    p('As a biochemistry and pre med student I place great importance on understanding 
-      the internal factors on maintaining a person\'s health and wellbeing. However, 
-      oftentimes we forget to understand the external factors that contribute to
-      a person’s welfare. As a result I believe analyzing the world happiness index
-      can help identify key contributing factors to happiness that can lead individuals
-      and society to a better, more meaningful, experience in life.'),
-    br(),
-    h4("Jasmine Y."),
-    h4("Sophomore"),
-    h4("Majors: N/A"),
-    p('This project reminded me of the factors that lead to a balanced life and 
-      strong communities: health, support systems, income, freedom, honesty in government,
-      and generosity. We can learn to use these factors to build into our value systems 
-      and as a foundation for policy making. It is prevalent that this report favors 
-      monetary values, with GDP per capita and Generosity being measured on donations 
-      to charity. Brazil has a high crime and poverty rate, but my family has strong 
-      social connections, causing greater emotional happiness. Nordic countries do have 
-      subsidized schooling and free healthcare but are not utopias. Though citizens of 
-      these counties are less likely to feel disenfranchised, there is also far-right 
-      nationalism on the rise and a trend of homogeneity. To share happiness, 
-      we must continue to fight for equity and make these six factors accessible 
-      to all.')
-  )
-)
+  titlePanel("Conclusion"),
+  tabsetPanel(
+    tabPanel('Takeaways'),
+    tabPanel('About Team', 
+             mainPanel(
+               h4("Stacy Che"),
+               tags$strong("Major: Economics, Education; Minor: Business"),
+               p('I developed a lot from this project as a data analyst and team player. 
+                  The measurement of happiness score and the trends we observed in this 
+                  project allowed me to see the usefulness of data visulization. While the 
+                  interactive map & data-wrangling in shiny improved my technical skill with R. 
+                  I am a good team player; I realized  I am responsible for constantly updating 
+                  my working progress, providing suggestions, and facilitating communication 
+                  with my teammates. '),
+               br(),
+               h4("Erin Morales"),
+               tags$strong("Major: Biochemistry; Minor: Data Science, Diversity"),
+               p('As a biochemistry and pre med student I place great importance on understanding 
+               the internal factors on maintaining a person\'s health and wellbeing. However, 
+               oftentimes we forget to understand the external factors that contribute to
+               a person’s welfare. As a result I believe analyzing the world happiness index
+               can help identify key contributing factors to happiness that can lead individuals
+               and society to a better, more meaningful, experience in life.'),
+               br(),
+               h4("Jasmine Y."),
+               tags$strong("Majors: N/A"),
+               p('This project reminded me of the factors that lead to a balanced life and 
+               strong communities: health, support systems, income, freedom, honesty in government,
+               and generosity. We can learn to use these factors to build into our value systems 
+               and as a foundation for policy making. It is prevalent that this report favors 
+               monetary values, with GDP per capita and Generosity being measured on donations 
+              to charity. Brazil has a high crime and poverty rate, but my family has strong 
+              social connections, causing greater emotional happiness. Nordic countries do have 
+              subsidized schooling and free healthcare but are not utopias. Though citizens of 
+              these counties are less likely to feel disenfranchised, there is also far-right 
+              nationalism on the rise and a trend of homogeneity. To share happiness, 
+              we must continue to fight for equity and make these six factors accessible 
+              to all.')
+             )) # close tabPanel 1
+  ) # close tabset panel for P5
+  
+) # close page 5
 
 
 
@@ -238,8 +268,19 @@ ui <- navbarPage(
   page_two,
   page_three,
   page_four,
-  page_five
-)
+  page_five,
+  # CSS Style
+  tags$head(
+    tags$style(HTML("
+      @import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=IBM Plex Serif&display=swap');
+      body{background-color:#e7eaf6;}
+      h1 {font-family: 'Aboreto';font-weight: 400;color: #113f67;}
+      p {font-family: 'IBM Plex Serif';}"
+    ) # close HTML
+    ) # close style
+  ) # close head
+)# close navbarpage
 
 
 # server page
@@ -266,7 +307,7 @@ server <- function(input, output) {
           locations = ~CODE,
           z = ~Happiness.Score,
           color = ~ Happiness.Score,
-          colors = 'Greens',
+          colors = 'Blues',
           text = ~Country,
           marker = list(line = l)
         ) %>%
@@ -361,6 +402,16 @@ server <- function(input, output) {
       return(make_lollipop(region_wh2021))
     }
   }) # close lollipop
+  
+  # Viz 4
+  output$boxplot <- renderPlot({
+    ggplot(wh_2021_df, aes(x = Region, y = Health..Life.Expectancy., fill = Region)) +
+      geom_boxplot()+
+      labs(title=" Health..Life.Expectancy. by world region", x= "Country", y = "Health..Life.Expectancy.") +
+      scale_fill_brewer(palette="PuBu")+
+      theme(legend.position = "top")+
+      coord_flip()
+  })
   
   
   
