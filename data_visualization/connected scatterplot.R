@@ -14,13 +14,16 @@ library(ggplot2)
 library(hrbrthemes)
 
 # what's the average happiness score in 2015?
-average_2015 = mean(wh_2015_df$Happiness.Score)
-average_2016 = mean(wh_2016_df$Happiness.Score)
-average_2017 = mean(wh_2017_df$Happiness.Score)
-average_2018 = mean(wh_2018_df$Happiness.Score)
-average_2019 = mean(wh_2019_df$Happiness.Score)
-average_2020 = mean(wh_2020_df$Happiness.Score)
-average_2021 = mean(wh_2021_df$Happiness.Score)
+calc_mean <- function(df){
+  average = mean(df$Happiness.Score)
+}
+average_2015 = calc_mean(wh_2015_df)
+average_2016 = calc_mean(wh_2016_df)
+average_2017 = calc_mean(wh_2017_df)
+average_2018 = calc_mean(wh_2018_df)
+average_2019 = calc_mean(wh_2019_df)
+average_2020 = calc_mean(wh_2020_df)
+average_2021 = calc_mean(wh_2021_df)
 
 # merge "average world happiness per year into a dataframe"
 year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021)
@@ -34,7 +37,6 @@ average_happiness_by_year %>%
   ggplot( aes(x=year, y=mean_happiness)) +
   geom_line( color="grey") +
   geom_point(shape=21, color="black", fill="#69b3a2", size=6) +
-  theme_ipsum() +
   ggtitle("Average Happiness By Year")
 
 
